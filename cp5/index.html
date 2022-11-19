@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIMER</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container text-center margin 30px auto">
+    <p id="timer">00:00:00</p>
+    <button id="start_stop" class="btn btn-lg btn-primary">START</button>
+  </div>
+  <script>
+    // 変数は宣言した場所でしか使えない→グローバル変数を使う
+    var start; //グローバル変数
+    var timer_id;
+    document.getElementById('start_stop').addEventListener('click', function () {
+      if (this.innerHTML === 'START') {
+        start = new Date();//宣言しているのでvarがいらない
+        // 1/1000＊10 = 1/100秒ごとにgoTimerを実施
+        timer_id = setInterval(goTimer, 10);
+        // ストップボタン作成 押した時表示をストップにbtn-primaryを削除してbtn-dangerを追加
+        // this = document.getElementById('start_stop').
+        this.innerHTML = "STOP";
+        this.classList.remove('btn-primary');
+        this.classList.add('btn-danger');
+      } else {
+        //STARTボタンに戻す インターバルのクリア
+        clearInterval(timer_id);
+        this.innerHTML = "START";
+        this.classList.remove('btn-danger');
+        this.classList.add('btn-primary');
+      }
+    });
+
+    //addZero
+    var addZero = function (value) {
+      if (value < 10) {
+        value = '0' + value;
+      }
+      // return必須！
+      return value;
+    }
+
+
+    var goTimer = function () {
+      var now = new Date();
+
+      var milli = now.getTime() - start.getTime();
+      // 1/1000秒の計算をMath.floor(小数点以下を切り捨て)
+      var seconds = Math.floor(milli / 1000);
+      // スタートボタンを押した際1970年1月1日からの経過時間をnow(現在時間)-start(開始時間)の差を表示
+      var minutes = Math.floor(seconds / 60);
+      var hours = Math.floor(minutes / 60);
+
+      seconds = seconds - minutes * 60;
+      minutes = minutes - hours * 60;
+      document.getElementById('timer').innerHTML = addZero(hours) + ':' + addZero(minutes) + ':' + addZero(seconds);
+    }
+  </script>
+  <!-- <script>
+    //function＝メソッド
+    var addZero = function (value) {
+      if (value < 10) {
+        value = '0' + value;
+      }
+      // return必須！
+      return value;
+    }
+    //下のようにも書ける
+    // function addZero(value) {
+
+    // }
+    // getElementById(id = start_stopが),addEventListener(clickされた時functionとして以下を実行)
+    // addEventListener 行動の種類、行動の内容が必要
+    document.getElementById('start_stop').addEventListener('click',function () {
+      // dateオブジェクト
+      var now = new Date();
+      var seconds = now.getUTCSeconds(); //秒を取得してsecondsに代入
+      //addZeroで０を追加
+      seconds = addZero(seconds);
+
+      var minutes = now.getMinutes(); //分を取得してminutesに代入
+      minutes = addZero(minutes);
+
+      var hours = now.getHours(); //時間を取得してhoursに代入
+      hours = addZero(hours);
+
+      // getElementById()id属性を使ってエレメントを取得して
+      // innerHTML = プロパティ(見た目、特徴)
+      // 動き＝メソッド 見た目＝プロパティ
+      document.getElementById('timer').innerHTML = hours + ':' + minutes + ':' + seconds;
+    });
+  </script> -->
+</body>
+
+</html>
