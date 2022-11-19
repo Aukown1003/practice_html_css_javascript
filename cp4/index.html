@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODAY</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>TODAY</h1>
+  </header>
+  <div class="container">
+    <script>
+      // 日付を表示する
+      var today = new Date();//下のgetMonthは0スタートなので+1している
+      var todayHtml = today.getFullYear() + '/' + (today.getMonth()+1) + '/' + today.getDate();
+
+      document.write('<p class="date">'+ todayHtml + '</p>');
+
+      // 変数宣言が不要なものもある(Math,abs等)
+      document.write(Math.abs(-12220));
+
+      // 関数式 var宣言は一回でOK
+      var answer = 10 + 3;
+      document.write('<br>10+3の結果は'+answer+"です");
+      // overwrite
+      answer = 10 - 3;
+      document.write('<br>10-3=' + answer);
+      // answer = answe + 10;は以下のように省略できる
+      answer +=10;
+      document.write('<br>上の式＋11=' + answer++);
+      // answer = answer + 1;は以下のように省略できる
+      document.write('<br>上の式＋1=' + answer++);
+    </script>
+  </div>
+</body>
+
+</html>
