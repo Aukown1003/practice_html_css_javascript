@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>My Photos</title>
+</head>
+
+<body>
+  <header>
+    <h1>My Photos</h1>
+  </header>
+  <div class="container">
+    <div id="img_unit">
+
+      <!-- 下の処理を繰り返し行いたい！ -->
+      <div class="photo">
+        <!-- <img src="img/img01.jpg">
+        <div class="inner">
+          <p>コメント１<span>nikname</span></p>
+        </div> -->
+      </div>
+
+    </div>
+  </div>
+  <script>
+    // ジェイソン配列
+    var images = [
+      {
+        "path": "img/img01.jpg",
+        "name": "nsme01",
+        "caption": "コメント1"//0番目
+      },
+      {
+        "path": "img/img02.jpg",
+        "name": "nsme02",
+        "caption": "コメント2"//1番目
+      }
+    ];
+    var img;
+    var caption;
+    var div;
+
+    // ここをコピーすれば同じものが作れる→for構文を使用 length データの個数＝２　i++ i = i+1
+    for (var i = 0; i < images.length; i++) {
+      img = document.createElement('img');
+      img.setAttribute('src', images[i].path);//i番目のpathを取得
+
+      caption = document.createElement('div');//divを作成
+      caption.className = 'inner';//divのnameをinnerとする
+      caption.innerHTML = '<p>' + images[i].caption + '<span>' + images[i].name + '</span></p>';//htmlとしてimagesのcaptionとnameを作成
+
+      div = document.createElement('div');
+      div.className = 'photo';
+      div.appendChild(img);//div name = photoにimgを追加
+      div.appendChild(caption);//div name = photoにcaptionを追加
+
+      document.getElementById('img_unit').appendChild(div);
+    }
+  </script>
+</body>
+
+</html>
